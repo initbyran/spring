@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+          PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" 
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+       
+<mapper namespace="myBoard">
+
+	<select id="allBoards" resultType="Board">		
+		<![CDATA[
+			SELECT boardNum, boardTitle, boardContent, memberName, boardDate, boardLike
+            FROM members AS m
+            INNER JOIN boards AS b
+            ON b.boardAuthor=m.memberId
+            ORDER BY b.boardNum DESC;
+		
+		]]>
+	</select>
+	
+	<insert id="newArticle" parameterType="Board">
+         <![CDATA[
+             INSERT INTO boards (boardTitle, boardContent, boardLike)
+             VALUES ( #{boardTitle}, #{boardContent}, 0)
+         ]]>
+	</insert>
+
+    <select id="article" resultType="Article">
+        <![CDATA[
+			SELECT boardNum, boardTitle, boardContent, memberName, boardDate, boardLike
+            FROM members AS m
+            ]]>
+    </select>
+   
+</mapper>
