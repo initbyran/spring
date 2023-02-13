@@ -48,7 +48,7 @@ public class BoardServlet extends HttpServlet {
         
         Member member = new Member();
         member = (Member) session.getAttribute("member");
-		String boardAuthor = member.getMemberName();
+		String boardAuthor = member.getMemberId();
 		
 		request.setCharacterEncoding("UTF-8");
 		String articleTitle = request.getParameter("articleTitle");
@@ -57,7 +57,7 @@ public class BoardServlet extends HttpServlet {
 		Board board = new Board();
 		board.setBoardTitle(articleTitle);
 		board.setBoardContent(articleContents);
-		board.setMemberName(boardAuthor);
+		board.setBoardAuthor(boardAuthor);
 		
 		// 2. 로직처리
 		

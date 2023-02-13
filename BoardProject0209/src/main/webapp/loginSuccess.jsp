@@ -41,7 +41,7 @@
                  <td><%= board.getBoardNum()%></td>
                  
                  <td><a href="article?boardNum=<%=board.getBoardNum()%>" ><%= board.getBoardTitle()%></a></td>
-                 <td><%= board.getMemberName()%></td>
+                 <td><%= board.getBoardAuthor()%></td>
                  <td><%= board.getBoardDate()%></td>
                  <td>0</td>
                  <td><%= board.getBoardLike()%></td>

@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import board.vo.Board;
-
 import common.myBatis.MyBatisConnectionFactory;
 
 
@@ -22,7 +21,7 @@ public class BoardDao {
 		return result;
 	}
 
-	
+
 
 	public void insert(Board board) {
 
@@ -34,5 +33,15 @@ public class BoardDao {
 		
 	}
 
+
+
+	public Board selectOne(Board board) {
+		SqlSession sqlSession = 
+				MyBatisConnectionFactory.getSqlSessionFactory().openSession();
+		Board result = sqlSession.selectOne("myBoard.articleDetails",board);
+		
+		sqlSession.close();
+		return result;
+	}
 	
 }

@@ -6,7 +6,6 @@ import board.dao.BoardDao;
 import board.vo.Board;
 
 
-
 public class BoardService {
 
 	public List<Board> getAllBoard() {
@@ -25,10 +24,15 @@ public class BoardService {
 		dao.insert(board);
 	}
 
-	
-
-
-
+	public Board selectOne(Board board) {
+		
+		BoardDao dao = new BoardDao();
+		Board result = dao.selectOne(board);
+		
+		return result;
+		
+		
+	}
 	
 	
 }

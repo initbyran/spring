@@ -7,27 +7,41 @@
 
 	<select id="allBoards" resultType="Board">		
 		<![CDATA[
-			SELECT boardNum, boardTitle, boardContent, memberName, boardDate, boardLike
-            FROM members AS m
-            INNER JOIN boards AS b
-            ON b.boardAuthor=m.memberId
-            ORDER BY b.boardNum DESC;
-		
+			SELECT boardNum, boardTitle, boardContent, boardAuthor, boardDate, boardLike
+            FROM boards
+            ORDER BY boardNum DESC;		
 		]]>
+	</select>
+	
+	<select id="allComments" parameterType="Comments" resultType="Comments">
+	     <![CDATA[
+	         SELECT commentsId, commentsContents, commentsDate
+	         FROM comments
+	         WHERE commentsArticleNum = #{commentsArticleNum}
+	         ORDER BY commentsNum DESC;
+	     ]]>
 	</select>
 	
 	<insert id="newArticle" parameterType="Board">
          <![CDATA[
-             INSERT INTO boards (boardTitle, boardContent, boardLike)
-             VALUES ( #{boardTitle}, #{boardContent}, 0)
+             INSERT INTO boards (boardTitle, boardContent, boardAuthor, boardLike)
+             VALUES ( #{boardTitle}, #{boardContent}, #{boardAuthor}, 0)
          ]]>
 	</insert>
 
-    <select id="article" resultType="Article">
+    <select id="articleDetails" resultType="Board">
         <![CDATA[
-			SELECT boardNum, boardTitle, boardContent, memberName, boardDate, boardLike
-            FROM members AS m
+			SELECT boardNum, boardTitle, boardContent, boardAuthor, boardDate, boardLike
+            FROM boards
+            WHERE boardNum = #{boardNum}
             ]]>
     </select>
+    
+    <insert id="newComments" parameterType="Comments">
+         <![CDATA[
+            INSERT INTO comments (commentsAriticleNum, commentsId, commentsContents)
+            VALUES ( #{commentsArticleNum}, #{commentsId}, #{commentsContents})
+         ]]>
+    </insert>
    
 </mapper>
