@@ -18,16 +18,16 @@ import comments.vo.Comments;
 import member.vo.Member;
 
 /**
- * Servlet implementation class CommentsServlet
+ * Servlet implementation class CommentsDelete
  */
-@WebServlet("/comments")
-public class CommentsServlet extends HttpServlet {
+@WebServlet("/deletecomments")
+public class CommentsDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CommentsServlet() {
+    public CommentsDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -44,36 +44,30 @@ public class CommentsServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		HttpSession session = request.getSession(true);
 		
-		Member member = new Member();
-		member = (Member) session.getAttribute("member");
-		String commentsId = member.getMemberId();
-		
-		// 1. 입력처리
 		request.setCharacterEncoding("UTF-8");
-		String commentsContents = request.getParameter("commentsContents");
+		
+        HttpSession session = request.getSession(true);
+        
+        Member member = new Member();
+        member = (Member) session.getAttribute("member");
+		
 		int commentsArticleNum = Integer.parseInt(request.getParameter("commentsArticleNum"));
 		
+		String commentsNum = request.getParameter("commentsNum");
+		
 		Comments comments = new Comments();
+		comments.setCommentsNum(Integer.parseInt(commentsNum));
 		comments.setCommentsArticleNum(commentsArticleNum);
-		comments.setCommentsId(commentsId);
-		comments.setCommentsContents(commentsContents);
-		
-		// 2. 로직처리
 		CommentsService service = new CommentsService();
-		service.uploadComments(comments);
+		service.delete(comments);
 		
-		// 3. 출력처리
-		
-		
+
 		Board board = new Board();
 		board.setBoardNum(commentsArticleNum);
 		
 		BoardService bservice = new BoardService();
 		Board result = bservice.selectOne(board);
-		
 		
 		List<Comments> list = null;
 		
@@ -82,6 +76,7 @@ public class CommentsServlet extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("articleDetails.jsp");
 		request.setAttribute("article", result);
 		request.setAttribute("comments", list);
+		request.setAttribute("login", member);
 		
 		dispatcher.forward(request, response);
 		

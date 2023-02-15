@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="member.vo.Member,board.vo.Board,java.util.List" %>
+    <%@ page import="member.vo.Member,board.vo.Board,board.vo.BoardComments,java.util.List" %>
     
 <!DOCTYPE html>
 <html>
@@ -33,8 +33,8 @@
         <tbody>
             
              <%
-                List<Board> list = (List<Board>)request.getAttribute("boardList"); 
-                for(Board board: list){
+                List<BoardComments> list = (List<BoardComments>)request.getAttribute("boardList"); 
+                for(BoardComments board: list){
                          %>
                 
             <tr>
@@ -43,7 +43,7 @@
                  <td><a href="article?boardNum=<%=board.getBoardNum()%>" ><%= board.getBoardTitle()%></a></td>
                  <td><%= board.getBoardAuthor()%></td>
                  <td><%= board.getBoardDate()%></td>
-                 <td>0</td>
+                 <td><%= board.getCntComments() %></td>
                  <td><%= board.getBoardLike()%></td>
             </tr>
             

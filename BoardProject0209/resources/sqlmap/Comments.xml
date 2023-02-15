@@ -7,7 +7,7 @@
 
 	<select id="allComments" parameterType="Comments" resultType="Comments">
 	     <![CDATA[
-	         SELECT commentsId, commentsContents, commentsDate
+	         SELECT commentsArticleNum, commentsNum, commentsId, commentsContents, commentsDate
 	         FROM comments
 	         WHERE commentsArticleNum = #{commentsArticleNum}
 	         ORDER BY commentsNum DESC;
@@ -21,4 +21,29 @@
          ]]>
     </insert>
    
+    
+    <update id="editComments" parameterType="Comments">
+          <![CDATA[
+            UPDATE comments
+            SET commentsContents=#{commentsContents}
+            WHERE commentsNum=#{commentsNum}
+          ]]>
+    </update>
+    
+    
+    <select id="commentsDetails" parameterType="Comments" resultType="Comments">
+         <![CDATA[
+            SELECT commentsArticleNum, commentsNum, commentsId, commentsContents
+            FROM comments
+            WHERE commentsNum = #{commentsNum}
+         ]]>
+    </select>
+   
+    <delete id="deleteComments" parameterType="Comments">
+          <![CDATA[
+            DELETE FROM comments
+            WHERE commentsNum = #{commentsNum}
+          ]]>    
+    </delete>
+    
 </mapper>

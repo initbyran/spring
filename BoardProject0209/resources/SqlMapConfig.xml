@@ -25,6 +25,8 @@
 	 	<typeAlias type="member.vo.Member" alias="Member"/>
 	 	<typeAlias type="board.vo.Board" alias="Board"/>
 	 	<typeAlias type="comments.vo.Comments" alias="Comments"/>
+        <typeAlias type="board.vo.BoardComments" alias="BoardComments"/>	
+	    <typeAlias type="board.vo.BoardLike" alias="BoardLike"/>
 	 </typeAliases>
 
 	<!-- Database 연결 정보 선언 -->

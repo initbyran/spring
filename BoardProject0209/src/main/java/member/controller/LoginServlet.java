@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import board.service.BoardService;
-import board.vo.Board;
+import board.vo.BoardComments;
 import member.service.MemberService;
 import member.vo.Member;
 
@@ -64,7 +64,7 @@ public class LoginServlet extends HttpServlet {
 		Member result = service.login(member);
 		
 		// 게시판 관련 데이터를 가져와야함
-		List<Board> list = null;
+		List<BoardComments> list = null;
 	
 		if(result !=null) {
 			BoardService bservice = new BoardService();

@@ -5,24 +5,24 @@
        
 <mapper namespace="myBoard">
 
-	<select id="allBoards" resultType="Board">		
+	<select id="allBoards" resultType="BoardComments">		
 		<![CDATA[
-			SELECT boardNum, boardTitle, boardContent, boardAuthor, boardDate, boardLike
+			SELECT boardNum, boardAuthor, boardDate, boardTitle,
+            (SELECT COUNT(clicklikeId)  
+            FROM likes
+            WHERE boards.boardNum = likes.articleNum
+            ) AS boardLIKE,
+            (SELECT  COUNT(commentsNum) 
+             FROM comments  
+             WHERE boards.boardNum = comments.commentsArticleNum
+            ) AS cntComments
             FROM boards
-            ORDER BY boardNum DESC;		
+            GROUP BY boards.boardNum
+            ORDER BY boards.boardNum DESC;	
 		]]>
 	</select>
-	
-	<select id="allComments" parameterType="Comments" resultType="Comments">
-	     <![CDATA[
-	         SELECT commentsId, commentsContents, commentsDate
-	         FROM comments
-	         WHERE commentsArticleNum = #{commentsArticleNum}
-	         ORDER BY commentsNum DESC;
-	     ]]>
-	</select>
-	
-	<insert id="newArticle" parameterType="Board">
+
+	<insert id="newArticle" parameterType="BoardComments">
          <![CDATA[
              INSERT INTO boards (boardTitle, boardContent, boardAuthor, boardLike)
              VALUES ( #{boardTitle}, #{boardContent}, #{boardAuthor}, 0)
@@ -31,17 +31,57 @@
 
     <select id="articleDetails" resultType="Board">
         <![CDATA[
-			SELECT boardNum, boardTitle, boardContent, boardAuthor, boardDate, boardLike
+			SELECT boardNum, boardAuthor, boardDate, boardTitle, 
+			(SELECT COUNT(clicklikeId)  
+            FROM likes
+            WHERE boards.boardNum = likes.articleNum
+            ) AS boardLIKE,
+            (SELECT  COUNT(commentsNum) 
+             FROM comments  
+             WHERE boards.boardNum = comments.commentsArticleNum
+            ) AS cntComments
             FROM boards
             WHERE boardNum = #{boardNum}
+           	
             ]]>
     </select>
     
-    <insert id="newComments" parameterType="Comments">
+    <update id="editArticle" parameterType="Board" >
          <![CDATA[
-            INSERT INTO comments (commentsAriticleNum, commentsId, commentsContents)
-            VALUES ( #{commentsArticleNum}, #{commentsId}, #{commentsContents})
+            UPDATE boards
+            SET boardTitle=#{boardTitle}, boardContent=#{boardContent}
+            WHERE boardNum=#{boardNum}
          ]]>
-    </insert>
+    </update>
+   
+    <delete id="deleteArticle" parameterType="Board">
+          <![CDATA[
+             DELETE FROM boards
+             WHERE boardNum=#{boardNum}
+          ]]>
+    </delete>
+    
+    <update id="addLike" parameterType="BoardLike">
+          <![CDATA[
+             INSERT INTO likes (articleNum, clicklikeId) 
+             VALUES ( #{articleNum},#{clicklikeId})
+          ]]>
+    </update>
+    
+    <delete id="deleteLike" parameterType="BoardLike">
+          <![CDATA[
+             DELETE FROM likes
+             WHERE articleNum=#{articleNum} AND clicklikeId=#{clicklikeId} 
+             
+          ]]> 
+    </delete>
+    
+    <select id="likeInfo" parameterType="BoardLike" resultType="BoardLike">
+           <![CDATA[
+              SELECT articleNum, clicklikeId
+              FROM likes
+              WHERE articleNum = #{articleNum}
+           ]]>
+    </select>
    
 </mapper>

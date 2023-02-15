@@ -20,4 +20,28 @@ public class CommentsService {
 		dao.insert(comments);
 		
 	}
+
+
+	public Comments selectOne(Comments comments) {
+		CommentsDao dao = new CommentsDao();
+		Comments result = dao.selectOne(comments);
+		
+		return result;
+	}
+
+
+	public void update(Comments comments) {
+		
+		CommentsDao dao = new CommentsDao();
+		dao.update(comments);
+		
+	}
+
+
+	public void delete(Comments comments) {
+		
+		CommentsDao dao = new CommentsDao();
+		dao.delete(comments);
+		
+	}
 }

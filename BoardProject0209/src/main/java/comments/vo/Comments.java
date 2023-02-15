@@ -2,6 +2,7 @@ package comments.vo;
 
 public class Comments {
 
+	private int commentsNum;
 	private int commentsArticleNum;
 	private String commentsId;
 	private String commentsContents;
@@ -10,11 +11,20 @@ public class Comments {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Comments(int commentsArticleNum, String commentsId, String commentsContents) {
+	public Comments(int commentsNum, int commentsArticleNum, String commentsId, String commentsContents) {
 		super();
+		this.commentsNum = commentsNum;
 		this.commentsArticleNum = commentsArticleNum;
 		this.commentsId = commentsId;
 		this.commentsContents = commentsContents;
+	}
+
+	public int getCommentsNum() {
+		return commentsNum;
+	}
+
+	public void setCommentsNum(int commentsNum) {
+		this.commentsNum = commentsNum;
 	}
 
 	public int getCommentsArticleNum() {
@@ -40,6 +50,9 @@ public class Comments {
 	public void setCommentsContents(String commentsContents) {
 		this.commentsContents = commentsContents;
 	}
+
+	
+
 
 	
 }

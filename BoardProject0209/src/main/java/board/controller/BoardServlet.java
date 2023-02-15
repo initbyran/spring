@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import board.service.BoardService;
-import board.vo.Board;
+import board.vo.BoardComments;
 
 import member.vo.Member;
 
@@ -54,7 +54,7 @@ public class BoardServlet extends HttpServlet {
 		String articleTitle = request.getParameter("articleTitle");
 		String articleContents = request.getParameter("articleContents");
 		
-		Board board = new Board();
+		BoardComments board = new BoardComments();
 		board.setBoardTitle(articleTitle);
 		board.setBoardContent(articleContents);
 		board.setBoardAuthor(boardAuthor);
@@ -65,7 +65,7 @@ public class BoardServlet extends HttpServlet {
 		service.upload(board);
 		
 		// 3. 출력처리
-		List<Board> list = null;
+		List<BoardComments> list = null;
 		
 		BoardService bservice = new BoardService();
 		
