@@ -14,11 +14,11 @@
     <h1><%=((Member)session.getAttribute("member")).getMemberName()%>님 환영합니다.</h1>
     <h3>게시글 목록</h3>
     <br><br>
+    
     <form action="newArticle.html" method="post">
     <button >새글작성</button>
     </form>
     
-
     <br><br>
     <table border=2>
     <!-- border : 테두리 -->
@@ -39,7 +39,6 @@
                 
             <tr>
                  <td><%= board.getBoardNum()%></td>
-                 
                  <td><a href="article?boardNum=<%=board.getBoardNum()%>" ><%= board.getBoardTitle()%></a></td>
                  <td><%= board.getBoardAuthor()%></td>
                  <td><%= board.getBoardDate()%></td>

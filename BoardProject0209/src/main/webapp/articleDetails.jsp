@@ -10,6 +10,7 @@
 <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 </head>
 <body>
+
 	<%
 	// 여기에서는 request.getAttribute("article") 정보를 변수에 나눠서 저장하기
 	Board articleData = (Board)request.getAttribute("article");
@@ -73,13 +74,13 @@
       %>
        
        <input type="hidden" name="boardNum" value=<%=bNum%>>
-       <button onclick="addLike(<%= bNum%>)">좋아요</button>
-       <button onclick="deleteLike(<%= bNum%>)" hidden="hidden">좋아요취소</button>
+       <button onclick="addLike(<%= bNum%>)" id="addLikeBtn">좋아요</button>
+       <button onclick="deleteLike(<%= bNum%>)" hidden="hidden" id="deleteLikeBtn">좋아요취소</button>
       
       <% } else {%>
        <input type="hidden" name="boardNum" value=<%=bNum%>>
-       <button onclick="addLike(<%= bNum%>)" hidden="hidden">좋아요</button>
-       <button onclick="deleteLike(<%= bNum%>)" >좋아요취소</button>
+       <button onclick="addLike(<%= bNum%>)" hidden="hidden" id="addLikeBtn">좋아요</button>
+       <button onclick="deleteLike(<%= bNum%>)" id="deleteLikeBtn">좋아요취소</button>
       
       <% } %>
      
@@ -145,7 +146,9 @@
 		   success : 
 			 function(countLikes){
 			   $('div').html("<div>"+'좋아요 수 : '+countLikes+"</div>");
-			 
+			   $('#addLikeBtn').hide();
+			   $('#deleteLikeBtn').show();
+			   
 				 console.log(countLikes);
 			 }  
 		   ,
@@ -168,6 +171,8 @@
 		   success : 
 			   function(countLikes){
 			      $('div').html("<div>"+'좋아요 수 : '+countLikes+"</div>");
+			      $('#addLikeBtn').show();
+				  $('#deleteLikeBtn').hide();
 		   },
 		   error : 
 			   function(){
