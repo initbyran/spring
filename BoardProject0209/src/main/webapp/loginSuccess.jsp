@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>게시판에 온 걸 환영해요</title>
 </head>
 <body>
 <!-- JSP에서는 나에게 할당된 session 객체를 그냥 사용할 수 있다 

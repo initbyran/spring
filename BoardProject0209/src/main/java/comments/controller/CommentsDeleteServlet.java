@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import board.service.BoardService;
 import board.vo.Board;
+import board.vo.BoardLike;
 import comments.service.CommentsService;
 import comments.vo.Comments;
 import member.vo.Member;
@@ -69,6 +70,11 @@ public class CommentsDeleteServlet extends HttpServlet {
 		BoardService bservice = new BoardService();
 		Board result = bservice.selectOne(board);
 		
+		BoardLike boardlike = new BoardLike();
+		boardlike.setArticleNum(board.getBoardNum());
+		
+		List<BoardLike> likeIdList = bservice.selectAllLikes(boardlike);
+		
 		List<Comments> list = null;
 		
 		list = service.getAllComments(commentsArticleNum);
@@ -77,7 +83,7 @@ public class CommentsDeleteServlet extends HttpServlet {
 		request.setAttribute("article", result);
 		request.setAttribute("comments", list);
 		request.setAttribute("login", member);
-		
+		request.setAttribute("likeInfo", likeIdList);
 		dispatcher.forward(request, response);
 		
 	}
