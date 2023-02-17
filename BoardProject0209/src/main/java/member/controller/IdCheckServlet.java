@@ -1,32 +1,29 @@
-package board.controller;
+package member.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
-import board.service.BoardService;
-import board.vo.Board;
-import board.vo.BoardLike;
-import member.vo.Member;
+import member.service.MemberService;
 
 /**
- * Servlet implementation class BoardLikeDeleteServlet
+ * Servlet implementation class idCheck
  */
-@WebServlet("/likedelete")
-public class BoardLikeDeleteServlet extends HttpServlet {
+@WebServlet("/idcheck")
+public class IdCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardLikeDeleteServlet() {
+    public IdCheckServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,39 +40,34 @@ public class BoardLikeDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 1. 입력처리 
 		request.setCharacterEncoding("UTF-8");
 		
-		String boardNum = request.getParameter("boardNum");
+		String memberId = request.getParameter("memberId");
 		
-		HttpSession session = request.getSession(true);
-        
-	    Member member = new Member();
-	    member = (Member) session.getAttribute("member");
-		String loginId = member.getMemberId();
-		
-		BoardLike boardlike = new BoardLike();
-		boardlike.setArticleNum(Integer.parseInt(boardNum));
-		boardlike.setClicklikeId(loginId);
-		
-		BoardService service = new BoardService();
-	    service.deleteLike(boardlike);
-	    
-	    Board board = new Board();
-	    board.setBoardNum(Integer.parseInt(boardNum));
-	    Board result = service.selectOne(board);
-	    
-	    // json
-        Gson gson = new Gson();
-		
-		String countLikes = gson.toJson(result.getBoardLike());
+		// 2. 로직처리
+		MemberService service = new MemberService();
 	
+		String foundId = service.selectOne(memberId);
 		
-		response.setContentType("application/json; charset=UTF-8");
+		boolean result = false;
+		
+		if (foundId != null) {
+			result = true ;
+		}
+		
+		// 3. json
+		
+		Gson gson = new Gson();
+		
+	    String idCheck = gson.toJson(result);
+	    
+	    response.setContentType("application/json; charset=UTF-8");
 		
 	    PrintWriter writer = response.getWriter();
-	    writer.println(countLikes);
+	    writer.println(idCheck);
 	    writer.close();
-		
+		 
 	}
 
 }

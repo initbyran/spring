@@ -23,6 +23,38 @@ public class MemberDao {
 		
 		return result;
 	}
+
+	public String selectOne(String memberId) {
+		SqlSession sqlSession = 
+				MyBatisConnectionFactory.getSqlSessionFactory().openSession();
+		
+		String foundId = sqlSession.selectOne("myMember.idCheck", memberId);
+		
+        sqlSession.close();
+		
+		return foundId;
+	}
+
+	public void insert(Member member) {
+
+		SqlSession sqlSession = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
+		
+		sqlSession.insert("myMember.newMember",member);
+		sqlSession.commit();
+		sqlSession.close();
+		
+	}
+
+	public void update(Member member) {
+		
+
+		SqlSession sqlSession = MyBatisConnectionFactory.getSqlSessionFactory().openSession();
+		
+		sqlSession.insert("myMember.modifyMembership",member);
+		sqlSession.commit();
+		sqlSession.close();
+		
+	}
 	
 	
 

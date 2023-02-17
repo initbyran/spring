@@ -14,6 +14,32 @@
 			      memberPw = #{memberPw};	
 		]]>
 	</select>
+	
+	<select id="idCheck" parameterType="String" resultType="String">
+	     <![CDATA[
+	        SELECT memberId
+	        FROM members
+	        WHERE memberId = #{memberId}
+	     ]]>
+	
+	</select>
+	
+	<insert id="newMember" parameterType="Member">
+	      <![CDATA[
+	         INSERT INTO members
+	         VALUES (#{memberId},#{memberName},#{memberPw})
+	      ]]>
+	      
+	</insert>
+	
+	<update id="modifyMembership" parameterType="Member">
+	      <![CDATA[
+	         UPDATE members
+	         SET memberPw=#{memberPw}, memberName=#{memberName}
+	         WHERE memberId=#{memberId}
+	      ]]>
+	      
+	</update>
 
     
 </mapper>

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import board.service.BoardService;
 import board.vo.Board;
+import board.vo.BoardLike;
 import comments.service.CommentsService;
 import comments.vo.Comments;
 import member.vo.Member;
@@ -83,7 +84,12 @@ public class CommentsEditingServlet extends HttpServlet {
 		BoardService bservice = new BoardService();
 		Board result = bservice.selectOne(board);
 	
+		 BoardLike boardlike = new BoardLike();
+		 boardlike.setArticleNum(board.getBoardNum());
+		 
 		// 3. 출력처리
+		List<BoardLike> likeIdList = bservice.selectAllLikes(boardlike);
+			
 		List<Comments> list = null;
 		
 		CommentsService cservice = new CommentsService();
@@ -93,7 +99,7 @@ public class CommentsEditingServlet extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("articleDetails.jsp");
 		request.setAttribute("article", result);
 		request.setAttribute("comments", list);
-		
+		request.setAttribute("likeInfo", likeIdList);
 		dispatcher.forward(request, response);
 		}
 		

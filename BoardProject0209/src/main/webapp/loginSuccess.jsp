@@ -19,6 +19,14 @@
     <button >새글작성</button>
     </form>
     
+    <form action="modifyMembership.jsp" method="post">
+    <button>회원정보 수정</button>
+    </form>
+    
+    <form action="logout" method="post">
+    <button>로그아웃</button>
+    </form>
+    
     <br><br>
     <table border=2>
     <!-- border : 테두리 -->
@@ -35,7 +43,7 @@
              <%
                 List<BoardComments> list = (List<BoardComments>)request.getAttribute("boardList"); 
                 for(BoardComments board: list){
-                         %>
+              %>
                 
             <tr>
                  <td><%= board.getBoardNum()%></td>

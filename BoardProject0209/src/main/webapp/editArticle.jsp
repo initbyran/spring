@@ -17,6 +17,7 @@
 	String bContents = articleData.getBoardContent();
 
  %>
+  
   <h1>게시글 수정</h1>
     <form action="edit" method="post">
     	<input type="hidden" name="boardNum" value="<%=bNum%>">
@@ -28,6 +29,8 @@
     <br><br>
     <button type="submit">수정하기</button>
     </form>
+    
+    <button onclick="history.back()">뒤로가기</button> 
     
 </body>
 </html>

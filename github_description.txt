@@ -13,3 +13,12 @@ git push
 +.
 git status
 마지막 commit 버전 이후 변경된 파일들에 대한 간략한 정보를 출력해준다.
+
+
+*** terminal 창에서 활용 가능한 명령어
+cd
+    change directory. 디렉토리(폴더) 이동하기
+    ex. cd ./spring
+        : 현재 폴더의 하위 폴더인 spring 폴더에 이동하기
+. : 현재 폴더
+.. : 상위 폴더

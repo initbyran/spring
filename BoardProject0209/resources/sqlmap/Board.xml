@@ -31,7 +31,7 @@
 
     <select id="articleDetails" resultType="Board">
         <![CDATA[
-			SELECT boardNum, boardAuthor, boardDate, boardTitle, 
+			SELECT boardNum, boardAuthor, boardContent, boardDate, boardTitle, 
 			(SELECT COUNT(clicklikeId)  
             FROM likes
             WHERE boards.boardNum = likes.articleNum
@@ -58,6 +58,7 @@
           <![CDATA[
              DELETE FROM boards
              WHERE boardNum=#{boardNum}
+             
           ]]>
     </delete>
     

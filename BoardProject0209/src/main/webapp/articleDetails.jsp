@@ -44,6 +44,7 @@
 	
 	  <form action="delete" method="post">
 	  <h1>게시글</h1>
+	    <button onclick="history.back()">뒤로가기</button> 
       <br><br>
         <input type="hidden" name="boardNum" value=<%=bNum%>>
         <input type="hidden" name="boardAuthor" value=<%=bAuthor%>>
@@ -149,7 +150,6 @@
 			   $('#addLikeBtn').hide();
 			   $('#deleteLikeBtn').show();
 			   
-				 console.log(countLikes);
 			 }  
 		   ,
 		   error : 

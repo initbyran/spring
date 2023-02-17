@@ -24,6 +24,7 @@
   <br><br>
   <button type="submit">수정하기</button>
   </form>
+    <button onclick="history.back()">뒤로가기</button> 
       
 </body>
 </html>
