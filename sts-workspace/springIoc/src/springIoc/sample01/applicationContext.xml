@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="messageBean" class="springIoc.sample01.MessageBeanImpl" scope="singletton">
+    <constructor-arg>
+    <!-- string ; reference type이나 primitive type처럼 취급 ; value는 값을 지정한다는 의미 -->
+       <value>딸기</value>
+    </constructor-arg>
+    <property name="cost">
+       <value>3000</value>
+    </property>
+    </bean>
+   
+    <bean id="messageBean1" class="springIoc.sample01.MessageBeanImpl" scope="singletton">
+    </bean>
+   
+    <bean id="messageBean2" class="springIoc.sample01.MessageBeanImpl" scope="singletton">
+    <property name="cost">
+       <value>4000</value>
+    </property>
+    </bean>
+
+   <bean id="messageBean3" class="springIoc.sample01.MessageBeanImpl" scope="singletton">
+    <constructor-arg index="0" type="java.lang.String" value="바나나"/>
+    <constructor-arg index="1" type="int" value="7000"/>
+   </bean>
+   
+</beans>

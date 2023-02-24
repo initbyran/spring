@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+   <!-- scope="singleton"은 생략가능 -->
+   <bean id="foo0" class="springIoc.sample02.Foo" scope="singleton"></bean>
+
+   <bean id="foo1" class="springIoc.sample02.Foo" scope="singleton">
+       <constructor-arg value="abc"/>
+   </bean>
+   
+   <bean id="foo2" class="springIoc.sample02.Foo" scope="singleton">
+       <constructor-arg index="0" type="java.lang.String" value="abc"/>
+       <constructor-arg index="1" type="int" value="1000"/>
+   </bean>
+   
+   <!-- injection -->
+   <bean id="myBar" class="springIoc.sample02.Bar"></bean>
+   
+   <bean id="foo3" class="springIoc.sample02.Foo">
+       <!-- primtive type, string 외 : ref(reference)사용 -->
+       <constructor-arg ref="myBar"></constructor-arg>
+   </bean>
+   
+   
+
+
+</beans>

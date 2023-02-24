@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+   <bean id="obj1" class="springIoc.sample03.User">
+     <constructor-arg value="홍길동"></constructor-arg>
+   </bean>
+   
+   <bean id="userService" class="springIoc.sample03.UserServiceImpl" />
+     
+   <bean id="myService" class="springIoc.sample03.UserServiceImpl">
+      <constructor-arg ref="obj1"></constructor-arg>
+   </bean>
+</beans>

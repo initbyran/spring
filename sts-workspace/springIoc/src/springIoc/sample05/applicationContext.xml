@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="f1" class="springIoc.sample05.User" />
+    
+    <bean id="f2" class="springIoc.sample05.User" >
+        <constructor-arg index="0" value="홍길동"></constructor-arg>
+        <constructor-arg index="1" value="2000-01-01"></constructor-arg>
+    </bean>
+
+    <bean id="f3" class="springIoc.sample05.User" >
+        <property name="name" value="신사임당"/>
+        <property name="birth" value="2001-12-01"></property>
+    </bean>
+</beans>
