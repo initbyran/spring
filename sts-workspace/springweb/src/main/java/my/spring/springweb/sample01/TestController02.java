@@ -1,7 +1,6 @@
 package my.spring.springweb.sample01;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -9,12 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/testController02")
 public class TestController02 {
 	
-	private static final Logger logger = LoggerFactory.getLogger(TestController02.class);
+//	private static final Logger logger = LoggerFactory.getLogger(TestController02.class);
  
     @RequestMapping("/info")	
 	String myMethod01() {
 		
-    	logger.debug("/testController02/info 호출!!");
+//    	logger.debug("/testController02/info 호출!!");
 		
 		return "sample01/testController02";
 		
@@ -23,7 +22,7 @@ public class TestController02 {
     @RequestMapping("/profile")	
 	String myMethod02() {
 		
-    	logger.debug("/testController02/profile 호출!!");
+//    	logger.debug("/testController02/profile 호출!!");
 		
 		return "sample01/testController02";
 		
@@ -33,7 +32,7 @@ public class TestController02 {
     @RequestMapping(value= {"","/test01","test02","test03/*"})	
 	String myMethod03() {
 		
-    	logger.debug("/testController02/멀티 호출!!");
+//    	logger.debug("/testController02/멀티 호출!!");
 		
 		return "sample01/testController02";
 		

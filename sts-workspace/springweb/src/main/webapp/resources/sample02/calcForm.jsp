@@ -12,7 +12,7 @@
      <form action="/springweb/calc.do" method="post">
          <input type="number" name="firstNum" required="required">
          <select name="operator">
-               <option value="add"> + </option>
+               <option value="plus"> + </option>
                 <option value="minus"> -</option>
                  <option value="mul"> * </option>
                   <option value="div"> / </option>
